@@ -1,19 +1,22 @@
-version: '3.8'
-
-services:
-  web:
-    build: .
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./database:/app/database   # Hier wird das Verzeichnis der SQLite-Datenbank gemountet
-    environment:
-      - FLASK_ENV=development
-    depends_on:
-      - db
-
-  db:
-    image: python:3.9-slim
-    command: tail -f /dev/null   # Hält den Container ausgeführt, damit er als Datenbank verwendet werden kann
-    volumes:
-      - ./database:/app/database   # Mountet das Verzeichnis der SQLite-Datenbank
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-flask-app
+  template:
+    metadata:
+      labels:
+        app: my-flask-app
+    spec:
+      containers:
+        - name: web
+          image: nicbodibm/m300mitdb:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_ENV
+              value: production
