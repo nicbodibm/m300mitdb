@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produktliste</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Hier geht der restliche HTML-Inhalt weiter -->
+
+    <h1>Produktliste</h1>
+    <div class="container">
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product">
+                <img src="{{ url_for('static', filename=product['image_path']) }}" alt="{{ product['name'] }}">
+                <h2>{{ product['name'] }}</h2>
+                <p>Preis: {{ product['price'] }} Franken</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
