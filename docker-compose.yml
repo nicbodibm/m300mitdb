@@ -29,5 +29,5 @@ spec:
   selector:
     app: my-flask-app
   ports:
-    - port: 80  # Port, über den der Service erreichbar sein wird
-      targetPort: 5000  # Port, auf den der Service verweisen soll
+    - port: 80  # Externer Port, über den der Service erreichbar sein wird
+      targetPort: 5000  # Interner Port, auf den der Service verweist
